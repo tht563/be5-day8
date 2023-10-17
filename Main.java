@@ -21,13 +21,16 @@ public class Main {
 						System.out.println("Invalid input. Please try again");
 				}
 				if (!Objects.isNull(user)) {
-					courseList(user);
+					user = courseList(user);
 				}
 			}while(Objects.isNull(user));
 		}while (true);
 	}
 	
-	public static void courseList(User user) {
+	public static User courseList(User user) {
+		final int LOGOUT = -1;
+		final int SHOW_USER_COURSE = 0;
+		
 		Scanner scan = new Scanner (System.in);
 		do {
 			System.out.println("--------------------------------------------------");
@@ -37,12 +40,11 @@ public class Main {
 			System.out.print("Your selection: ");
 			int selection = scan.nextInt();
 			switch (selection) {
-				case (-1):
-					user = null;
-					return;
-				case (0):
+				case (LOGOUT):
+					return(null);
+				case (SHOW_USER_COURSE):
 					yourCourse(user);
-					return;
+					break;
 				default:
 					showCourseDetails(user,Database.COURSE_DB.get(selection-1));
 			}
@@ -51,8 +53,9 @@ public class Main {
 	}
 	
 	public static void showCourseDetails(User user, Course course) {
-		Scanner scan = new Scanner (System.in);
 		
+		
+		Scanner scan = new Scanner (System.in);
 
 		CourseService.showCourseDetails(course);
 		System.out.println("Do you want to enroll this course?");
@@ -135,6 +138,7 @@ public class Main {
 	
 	public static int mainMenu() {
 		Scanner scan = new Scanner (System.in);
+		System.out.println("--------------------------------------------------");
 		System.out.println("Welcome to Coding Mentor.");
 		System.out.println("1. Login");
 		System.out.println("2. Register");
