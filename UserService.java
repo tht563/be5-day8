@@ -37,6 +37,7 @@ public class UserService {
 		int i = 1;
 		if (user.getRegisteredCourse().size()==0) {
 			System.out.println("There is no course in your account.");
+			return;
 		}
 		for (Course course: user.getRegisteredCourse()) {
 			System.out.println(i+ ". "+course.getName());
