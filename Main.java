@@ -104,6 +104,10 @@ public class Main {
 	}
 	
 	public static User login() {
+		
+		final int LOGIN_HAS_BEEN_FAILED_DUE_TO_WRONG_PASSWORD_OR_USERID = -1;
+		final int USER_ACCOUNT_HAS_BEEN_LOCKED = -2;
+		
 		Scanner scan = new Scanner (System.in);
 
 		System.out.println("--------------------------------------------------");
@@ -114,11 +118,11 @@ public class Main {
 		String password = scan.next();
 		
 		int index = UserService.login(id, password);
-		if (index == -1) {
+		if (index == LOGIN_HAS_BEEN_FAILED_DUE_TO_WRONG_PASSWORD_OR_USERID) {
 			System.out.println("Your login has been failed. Please try agin");
 			return (null);
 		}
-		if (index == -2) {
+		if (index == USER_ACCOUNT_HAS_BEEN_LOCKED) {
 			System.out.println("Your account has been locked.");
 			return (null);
 		}
